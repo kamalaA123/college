@@ -1,0 +1,308 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sign Up 10</title>
+	          <script>
+const selectOptions = [
+    {
+        name: "Commerce",
+        cities: [
+            "Accountancy",
+            "Bcom",
+            "Bachelor of Economics",
+        ],
+    },
+    {
+        name: "Computer Science",
+        cities: [
+            "BCA",
+            "Bsc.com.sci",
+            "Data Science",
+        ],
+    },
+    {
+        name: "Humanities",
+        cities: [
+            "History",
+            "Sociology",
+            "Political science",
+        ],
+    },
+    {
+        name: "Biology Science",
+        cities: [
+            "Pharmacy",
+            "BDS",
+            "Radiography",
+        ],
+    },
+    {
+        name: "Home Economics",
+        cities: [
+            "Culinary Art",
+            "Personal Finance",
+            "Interior Design",
+        ],
+    },
+];
+
+
+/**
+Create an option element
+@param {string} value - Option value
+@return {Element} - option element
+*/
+function createOption(value) {
+    const opt = document.createElement('option');
+    const textNode = document.createTextNode(value);
+    opt.appendChild(textNode);
+    opt.value = value;
+    return opt;
+}
+
+/**
+Create options with Select
+@param {string} selectId - parent of options
+@param {array} options - arrays of options
+*/
+function createOptionsSelect(selectId, options) {
+    const select = document.getElementById(selectId);
+
+    // clear all previous options
+    select.innerHTML = '';
+
+    for(let i=0;i<options.length;i++) {
+        select.appendChild(options[i]);
+    }
+}
+
+/**
+ * Retrieve state values from selectOptions
+ * @return {array} state values
+ */
+function getSelectOptionsStates() {
+    return selectOptions.map(value => value.name);
+}
+
+/**
+ * Retrieve cities - values from selectOptions
+ * @param {string} state - selected state
+ * @return {array} - state cities
+ */
+function getSelectOptionsCities(state) {
+    return selectOptions
+            .filter(value => value.name===state)
+            .map(val => val.cities)[0];
+}
+
+/**
+ * Create select id=state with all the state options
+ */
+function createStateSelect() {
+    const states = getSelectOptionsStates();
+    const stateOptions = states.map(state => createOption(state));
+    createOptionsSelect('state', stateOptions);
+}
+
+/**
+ * Create select id=state with all the city options
+ */
+function createStateSelect() {
+    const states = getSelectOptionsStates();
+    const options = states.map(state => createOption(state));
+    createOptionsSelect('state', options);
+}
+
+/**
+ * Create select id=city with all the city options
+ * @param {string} stateId - selected state Id
+ */
+function createCitySelect(stateId) {
+    const cities = getSelectOptionsCities(stateId);
+    const options = cities.map(city => createOption(city));
+    createOptionsSelect('city', options);
+}
+
+/**
+ * onChange event trigger for state select
+ */
+function onSelectState() {
+    const selectedState = document.getElementById('state').value;
+    createCitySelect(selectedState);
+}
+
+/**
+ * onload callback
+ */
+function init() {
+    // Default state select
+    const selectedStateDefault = 'state1';
+
+    // console.log(getSelectOptionsStates());
+    // console.log(getSelectOptionsCities('state3'));
+
+    document.getElementById('state').addEventListener('change', (e) => onSelectState(e), false);
+
+    createStateSelect();
+    createCitySelect(selectedStateDefault);
+}
+
+onload = init;
+
+ </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{% static 'css_form/style.css' %}">
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">eLEARNING STORE Form</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 d-flex img d-flex align-items-end" style="background-image: url({% static 'img_form/bg.jpg' %});">
+							<div class="text w-100">
+								<h2 class="mb-4">Welcome to eLEARNING form</h2>
+								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+							</div>
+			      </div>
+						<div class="login-wrap p-4 p-md-5">
+	      			<h3 class="mb-3">Request Form</h3>
+							<form action="#" class="signup-form">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label" >Full Name</label>
+					      			<input type="text" class="form-control" placeholder="Full Name">
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label">DOB</label>
+					      			<input type="date" class="form-control" placeholder="Date of Birth"><label class="label">AGE</label><input type="text" class="form-control" placeholder='Age' >
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      				<label class="label">Gender</label>
+					      				<input type="radio" name="g" value="Female"> <label class="label">Female</label>
+										<input type="radio" name="g" value="Male"> <label class="label">Male</label>
+					      				</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label">Phone no.</label>
+					      			<input type="text" class="form-control" placeholder="+01">
+					      		</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+				            	<label class="label">Email</label>
+				              <input type="email" class="form-control" placeholder="Email">
+				            </div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      			<label class="label">Address</label>
+					      			<input type="text" class="form-control" placeholder="Address">
+					      				</div>
+									</div>
+<!--									dropdown-->
+										<div class="col-md-12">
+											<div class="form-group d-flex align-items-center">
+												<label class="label">Department</label>
+            								<select id="state" class="form-control">
+            								</select>
+											</div>
+        								</div>
+
+        								<div class="col-md-12">
+											<div class="form-group d-flex align-items-center">
+												<label class="label">Courses</label>
+											<select id="city" class="form-control">
+            								</select>
+        									</div>
+										</div>
+<!--									dropdown end-->
+									<div class="col-md-12">
+											<div class="form-group d-flex align-items-center">
+												<label class="label">Purpose</label>
+												<select class="form-control">
+												<option selected>Choose...</option>
+												<option value="1">Enquiry</option>
+												<option value="2">Exam Fee</option>
+												<option value="3">TimeTable</option>
+													<option value="4">Course Materials</option>
+											    </select>
+											</div>
+        								</div>
+
+									<div class="col-md-12">
+										<div class="form-group d-flex align-items-center">
+					      					<label class="label">Materials</label>
+											<div class="w-100">
+												<input type="checkbox">&nbsp;<label>Pen</label>&nbsp;&nbsp;&nbsp;
+												<input type="checkbox">&nbsp;<label>Papers</label>&nbsp;&nbsp;&nbsp;
+												<input type="checkbox">&nbsp;<label>Textbook</label>
+											</div>
+					      				</div>
+									</div>
+
+									<div class="col-md-12 my-4">
+										<div class="form-group">
+<!--				            	<div class="w-100">-->
+<!--					            	<label class="checkbox-wrap checkbox-primary">I agree all statements in terms of service-->
+<!--												  <input type="checkbox" checked>-->
+<!--												  <span class="checkmark"></span>-->
+<!--												</label>-->
+<!--											</div>-->
+				            </div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+				            				<button type="reset" class="btn btn-secondary submit p-3" onclick="alert('Your Form Submitted')">Submit</button>
+											<button type="submit" class="btn btn-secondary submit p-3"><a href="{% url 'college_app:index' %}">Logout</a></button>
+				            			</div>
+									</div>
+								</div>
+
+		          </form>
+<!--		          <div class="social-wrap">-->
+<!--		          	<p class="or">-->
+<!--		          		<span>or</span>-->
+<!--		          	</p>-->
+<!--		      			<p class="mb-3 text-center">Signup with this services</p>-->
+<!--		      			<p class="social-media d-flex justify-content-center">-->
+<!--		      				<a href="#" class="social-icon google d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>-->
+<!--									<a href="#" class="social-icon facebook d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>-->
+<!--									<a href="#" class="social-icon twitter d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>-->
+<!--								</p>-->
+<!--	          	</div>-->
+<!--		          <div class="w-100 text-center">-->
+<!--								<p class="mt-4">I'm already a member! <a href="#signin">Sign In</a></p>-->
+<!--		          </div>-->
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="{% static 'js_form/jquery.min.js' %}"></script>
+  <script src="{% static 'js_form/popper.js' %}"></script>
+  <script src="{% static 'js_form/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js_form/main.js' %}"></script>
+
+	</body>
+</html>
+
